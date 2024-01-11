@@ -43,6 +43,7 @@ def read_astra():
     return jsonify(data)
 
 
+@app.route("/insertData", methods=["POST"])
 def insert_astra():
     params = request.json
 
