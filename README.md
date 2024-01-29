@@ -35,7 +35,7 @@
     )
     ```
 
-7. Confirm extension has been successfully created at <https://console.cloud.google.com/vertex-ai/extensions>
+9. Confirm extension has been successfully created at <https://console.cloud.google.com/vertex-ai/extensions>
 
 ## Getting Started Info from Google
 
