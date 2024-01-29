@@ -13,9 +13,12 @@
 4. On line 12 of `extension.py`, et the `GOOGLE_APPLICATION_CREDENTIALS` environment variable to the name of the JSON service account file from step 2
 5. On line 15 of `extension.py`, set the `PROJECT_ID` environment variable to the ID of the GCP project
 6. In the [Google Secrets Manager](https://console.cloud.google.com/security/secret-manager), create a secret for your **Astra DB API Endpoint**, named `ASTRA_DB_API_ENDPOINT`, and for your **Astra DB Application Token**, named `ASTRA_DB_APPLICATION_TOKEN`.
-7. Register your extension using the Python SDK:
+7. Copy the `extension.yaml` file in the `astra-crud-extension-api` folder to the GCS bucket of your choice.
+8. Register your extension using the Python SDK, substituting `<YOUR_BUCKET_NAME>` as appropriate:
 
     ```python
+    from google.cloud.aiplatform.private_preview import llm_extension
+
     llm_extension.Extension.create(
         display_name = "Read Astra",
         description = "Loads data from AstraDB and returns it to the user",
@@ -23,7 +26,7 @@
             "name": "astra_tool",
             "description": "Access and process data from AstraDB",
             "api_spec": {
-                "open_api_gcs_uri": f"gs://{BUCKET_NAME}/{EXTENSION_PATH}/extension.yaml"
+                "open_api_gcs_uri": f"gs://<YOUR_BUCKET_NAME>/extension.yaml"
             },
             "auth_config": {
                 "auth_type": "NO_AUTH",
