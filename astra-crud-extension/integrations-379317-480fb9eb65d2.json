@@ -1,0 +1,13 @@
+{
+  "type": "service_account",
+  "project_id": "integrations-379317",
+  "private_key_id": "480fb9eb65d25372f65a099f4c36deb4e2e0a868",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEuwIBADANBgkqhkiG9w0BAQEFAASCBKUwggShAgEAAoIBAQCQV36l8JXmMW1G\nhZBbgd2jIoUIqywreD4i+R6LM/z3UzoEYHHlk1hvOzUl1qo2v927GglS8GTQlP04\nzgf7oxlZDMHCNUhLHjoxwCESu9jCBGfu8KBlbhf3aiCgvp336Lr/2aulYJGNazJU\n+GETPnMuI3KVBnOUkJn/DqHVjQBzsqiTAHHUuCQfadax9shu7/Ozpg9l9N5YE5C1\nHurX9nZvSeBxS3BMFSQDSjZPIARgh8qY2YRui6i1mUiuI0GM1KUt3xZ4cRpNmTVe\nxUGR3vPytTMau9ABfq8g7T3h8AiwBUmmqgQQzM+L5rJnqJqq+O728p7DQY3rzhzF\nDqYS/E+9AgMBAAECgf8FevLtXMjEuvy+IqWopsLNWbvX5cbOk8C/wwGUSkHbxUCD\nwqRBpAv5oIJXaqCpWiw0Kt3/74i6KmFRH23DQ0JrYTw38jYI8t2OugznD93ufQ9T\nZCxH8R0ARmhQwCcVEU8WWae7ldnw4tweRHR+yV1mVmWLwYoo6KCK6JQxKTuhfUQI\nJtHMoxgSeAEfknS+lU+6siQcKGvJUspUDaAFMiV0+RdIeN2iT22YL+MmgNM/Q1x3\nYF2t9YroWYxKpzZAxiIxglV+mYO6kYOggBMtDb6BfE13MKJnmcX4fGMiwZ67r8YX\nxoXSO29fdwMYzEOVn46jf+NP4I7xQ1FomBS4j/ECgYEAxoOp3WZhBhpiDAjprOfk\nPtgzJr5bmfoJ3LWGaFbxO0asnH87WdGI6uHsXbmmAeP/dFNb6Mj91vUuCvwkgMG3\nf1XrD7+nsXqt7eshyshUD8t5H9T/CBXxntN4HjF9seSwGf3g99FUSGDHk3gKIB7D\nM9MuKZNwL2Ef0NWPrYW+GdUCgYEAuiPkjVP8upbXLYjvqo+0/0IA9d9BL9Zep5vP\nkhP9g7AbpIbCgfSJbdrlfTVgBnT/MGQiXrH5tt7kqtkfp5+jGffwjl40+3OunMCu\nEOVp+Slu2fMn/GsTciHfeBbis4tATxTkP4jtzHf+1tVdZ1wYPbgydq0arhwxo77f\nVmxiKkkCgYEAt27GMYz+rnMGknRR6LHGWMPSUESpxBglsMoTzqo38jwWF+4BW7eg\nutnUXa7EVQ7m6Ah27x16YXzg9MmUuV1HP+SWdlD0laz0ttoEuapu8sFjxSQ+HKya\nPdbOMagtq4nTp9DOZnAJX2/+Oqg7Qv7qBSNojoZsrXsjuQb94quow5kCgYALcMFP\nXmYeIb8/8TapyQNa3PeqJPqgshBHRPBRDiF6wowwZIf37Mu1kMqiE3G/c9lrY/wo\nzc+HSdPMHGQxrUIdCnwig+/FtKp6v+zy5ObKhZ1mj+dZQEuFrEdL3jw4xMpDEgml\nTgkvlAB5u8tt2t8yi+uuF52YLetvIQAhE7BE4QKBgFy5Bml0FcdtXqjbErV3hb2k\nVWKUgI1K1KxqwNLLTVn3S6sC7KGMnJQyS9MQuncr8jQU32Dq+72uGO9iDF4Dk4FE\nATQ3CwYaPNgMqGtLFCWSuD6bY4Ra6jHRLJRMuzDs5uLYeFY7zZT7eh+8Ls4InIsW\ndpYBVGlQNwz9gIcvdUR0\n-----END PRIVATE KEY-----\n",
+  "client_email": "eric-vertexai-extension@integrations-379317.iam.gserviceaccount.com",
+  "client_id": "102682789796928383181",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/eric-vertexai-extension%40integrations-379317.iam.gserviceaccount.com",
+  "universe_domain": "googleapis.com"
+}
