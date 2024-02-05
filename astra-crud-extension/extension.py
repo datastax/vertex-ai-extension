@@ -8,8 +8,7 @@ import os
 import uuid
 
 # Set the path to the service account file
-if "GOOGLE_APPLICATION_CREDENTIALS" not in os.environ:
-    os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "integrations-379317-480fb9eb65d2.json"
+os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "integrations-379317-480fb9eb65d2.json"
 
 # Provide the GCP Project ID
 project_id = os.environ.get("PROJECT_ID", "747469159044")

@@ -4,6 +4,8 @@ info:
   title: Astra Vertex Extension
   description: An extension to perform CRUD actions on data within your Astra Database.
   version: 1.0.0
+servers:
+  - url: https://extension-we3tzahyyq-uc.a.run.app
 paths:
   /readData:
     get:
