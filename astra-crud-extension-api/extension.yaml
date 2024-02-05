@@ -8,7 +8,7 @@ servers:
   - url: https://extension-we3tzahyyq-uc.a.run.app
 paths:
   /readData:
-    get:
+    post:
       operationId: readData
       summary: Search for data within the database
       parameters:
@@ -21,7 +21,7 @@ paths:
         - name: filter
           in: query
           description: The filter to be applied to the search
-          required: true
+          required: false
           schema:
             type: object
       responses:
@@ -84,7 +84,7 @@ paths:
                 items:
                   type: object
   /deleteData:
-    delete:
+    post:
       operationId: deleteData
       summary: Delete existing data within the database
       parameters:
