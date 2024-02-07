@@ -5,25 +5,53 @@ info:
   description: An extension to perform CRUD actions on data within your Astra Database.
   version: 1.0.0
 servers:
-  - url: https://extension-we3tzahyyq-uc.a.run.app
+  - url: 'https://extension-we3tzahyyq-uc.a.run.app'
 paths:
+  /hello:
+    get:
+      operationId: hello
+      summary: A simple hello world endpoint
+      parameters:
+        - name: token
+          in: header
+          description: The token to be used for the request
+          required: false
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
   /readData:
     post:
       operationId: readData
       summary: Search for data within the database
       parameters:
-        - name: tableName
-          in: query
-          description: The name of the table to search
+        - name: token
+          in: header
+          description: The token to be used for the request
           required: true
           schema:
             type: string
-        - name: filter
-          in: query
-          description: The filter to be applied to the search
-          required: false
-          schema:
-            type: object
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                api_endpoint:
+                  type: string
+                tableName:
+                  type: string
+                filter:
+                  type: object
       responses:
         '200':
           description: Successful response
@@ -37,6 +65,13 @@ paths:
     post:
       operationId: updateData
       summary: Update existing data within the database
+      parameters:
+        - name: token
+          in: header
+          description: The token to be used for the request
+          required: true
+          schema:
+            type: string
       requestBody:
         required: true
         content:
@@ -44,6 +79,8 @@ paths:
             schema:
               type: object
               properties:
+                api_endpoint:
+                  type: string
                 tableName:
                   type: string
                 filter:
@@ -63,6 +100,13 @@ paths:
     post:
       operationId: insertData
       summary: Insert new data into the database
+      parameters:
+        - name: token
+          in: header
+          description: The token to be used for the request
+          required: true
+          schema:
+            type: string
       requestBody:
         required: true
         content:
@@ -70,6 +114,8 @@ paths:
             schema:
               type: object
               properties:
+                api_endpoint:
+                  type: string
                 tableName:
                   type: string
                 data:
@@ -88,18 +134,25 @@ paths:
       operationId: deleteData
       summary: Delete existing data within the database
       parameters:
-        - name: tableName
-          in: query
-          description: The name of the table
+        - name: token
+          in: header
+          description: The token to be used for the request
           required: true
           schema:
             type: string
-        - name: filter
-          in: query
-          description: The filter to be applied to the search
-          required: true
-          schema:
-            type: object
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                api_endpoint:
+                  type: string
+                tableName:
+                  type: string
+                filter:
+                  type: object
       responses:
         '200':
           description: Data deleted successfully
@@ -109,4 +162,3 @@ paths:
                 type: array
                 items:
                   type: object
-
