@@ -16,7 +16,7 @@
 ### Using the Vertex AI Extension UI
 
 1. Browse to the [Vertex AI Extensions Page](https://console.cloud.google.com/vertex-ai/extensions)
-2. Click `Create New Extensions`
+2. Click `Create New Extension`
 3. Fill in the fields of the form. See screenshots for example values.
 
 ### Using the Python SDK
