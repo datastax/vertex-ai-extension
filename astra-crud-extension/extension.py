@@ -11,7 +11,7 @@ app = Flask(__name__)
 
 @app.route("/hello", methods=["GET"])
 def hello_world():
-    data = {"message": request.headers.get("token")}
+    data = {"message": "Hello, World!"}
     
     return jsonify(data)
 
@@ -21,15 +21,14 @@ def read_astra():
     params = request.json
 
     # Grab the Astra token and api endpoint from the environment
-    token = params.get("token", request.headers.get("token"))
-    api_endpoint = params.get("api_endpoint")
+    raw_token = params.get("token", request.headers.get("token"))
+    token, api_endpoint, table = raw_token.split(";")
 
     # Error out if we don't have the token or api_endpoint
     if not api_endpoint:
         return jsonify({"error": "api_endpoint not provided"})
 
     # Optional Params for the astra call
-    table = params.get("tableName", "test")
     filter = params.get("filter", None)
 
     # Call the vector find operation
@@ -45,8 +44,8 @@ def insert_astra():
     params = request.json
 
     # Grab the Astra token and api endpoint from the environment
-    token = params.get("token", request.headers.get("token"))
-    api_endpoint = params.get("api_endpoint")
+    raw_token = params.get("token", request.headers.get("token"))
+    token, api_endpoint, table = raw_token.split(";")
 
     # Error out if we don't have the token or api_endpoint
     if not api_endpoint:
@@ -61,7 +60,6 @@ def insert_astra():
     }
 
     # Optional Params for the astra call
-    table = params.get("tableName", "test")
     data = params.get("data", doc)
 
     # Initialize our vector db
@@ -79,15 +77,14 @@ def update_astra():
     params = request.json
 
     # Grab the Astra token and api endpoint from the environment
-    token = params.get("token", request.headers.get("token"))
-    api_endpoint = params.get("api_endpoint")
+    raw_token = params.get("token", request.headers.get("token"))
+    token, api_endpoint, table = raw_token.split(";")
 
     # Error out if we don't have the token or api_endpoint
     if not api_endpoint:
         return jsonify({"error": "api_endpoint not provided"})
 
     # Optional Params for the astra call
-    table = params.get("tableName", "test")
     filter = params.get("filter", None)
     field_update = params.get("fieldUpdate", 1)
 
@@ -104,15 +101,14 @@ def delete_astra():
     params = request.json
 
     # Grab the Astra token and api endpoint from the environment
-    token = params.get("token", request.headers.get("token"))
-    api_endpoint = params.get("api_endpoint")
+    raw_token = params.get("token", request.headers.get("token"))
+    token, api_endpoint, table = raw_token.split(";")
 
     # Error out if we don't have the token or api_endpoint
     if not api_endpoint:
         return jsonify({"error": "api_endpoint not provided"})
 
     # Optional Params for the astra call
-    table = params.get("tableName", "test")
     filter = params.get("filter", None)
 
     # Call the vector find operation

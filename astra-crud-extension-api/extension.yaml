@@ -5,7 +5,7 @@ info:
   description: An extension to perform CRUD actions on data within your Astra Database.
   version: 1.0.0
 servers:
-  - url: 'https://extension-we3tzahyyq-uc.a.run.app'
+  - url: 'https://astra-crud-extension-we3tzahyyq-uc.a.run.app'
 paths:
   /hello:
     get:
@@ -46,10 +46,6 @@ paths:
             schema:
               type: object
               properties:
-                api_endpoint:
-                  type: string
-                tableName:
-                  type: string
                 filter:
                   type: object
       responses:
@@ -79,10 +75,6 @@ paths:
             schema:
               type: object
               properties:
-                api_endpoint:
-                  type: string
-                tableName:
-                  type: string
                 filter:
                   type: object
                 fieldUpdate:
@@ -114,10 +106,6 @@ paths:
             schema:
               type: object
               properties:
-                api_endpoint:
-                  type: string
-                tableName:
-                  type: string
                 data:
                   type: object
       responses:
@@ -147,10 +135,6 @@ paths:
             schema:
               type: object
               properties:
-                api_endpoint:
-                  type: string
-                tableName:
-                  type: string
                 filter:
                   type: object
       responses:
