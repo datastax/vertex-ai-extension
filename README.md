@@ -83,7 +83,7 @@
     }]
     
     extension_astra = llm_extension.Extension.create(
-        display_name = "Perform a CRUD Operation on Astra DB",
+        display_name = "astra_tool",
         description = "Inserts, loads, updates, or deletes data from Astra DB and returns it to the user",
         manifest = {
             "name": "Astra CRUD Extension for Vertex AI",
