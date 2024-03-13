@@ -19,6 +19,9 @@
 2. Click `Create New Extension`
 3. Fill in the fields of the form. See screenshots for example values.
 
+![Example of Registering Astra Extension](images/vertexai1.png)
+![Example of Registering Astra Extension](images/vertexai2.png)
+
 ### Using the Python SDK
 
 1. Copy the `extension.yaml` file in the `astra-crud-extension-api` folder to the GCS bucket and folder of your choice, such as `gs://{BUCKET_NAME}/{EXTENSION_PATH}/extension.yaml`.
@@ -101,6 +104,14 @@
     ```
 
 3. Confirm extension has been successfully created at <https://console.cloud.google.com/vertex-ai/extensions>
+
+## Running your Extension
+
+You can now run your extension, either testing from the Vertex AI Extensions UI, or via Python like so:
+
+```python
+
+```
 
 ## Getting Started Info from Google
 
