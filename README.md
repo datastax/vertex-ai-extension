@@ -10,8 +10,9 @@
     git clone git@github.com:riptano/vertex-ai-extension.git
     ```
 
-2. In the [Google Secrets Manager](https://console.cloud.google.com/security/secret-manager), create a secret for your **Astra DB Credentials**, named `VERTEX_AI_TOKEN`, the format of which is as follows: `<ASTRA_DB_APPLICATION_TOKEN>;<ASTRA_DB_API_ENDPOINT>;<ASTRA_DB_TABLE>`.
-3. Next, choose either a UI or Python-based method of registering the extension
+2. Download and install the SDK from below, see the Getting Started Info from Google section at the bottom of the README for more details.
+3. In the [Google Secrets Manager](https://console.cloud.google.com/security/secret-manager), create a secret for your **Astra DB Credentials**, named `VERTEX_AI_TOKEN`, the format of which is as follows: `<ASTRA_DB_APPLICATION_TOKEN>;<ASTRA_DB_API_ENDPOINT>;<ASTRA_DB_TABLE>`.
+4. Next, choose either a UI or Python-based method of registering the extension
 
 ### Using the Vertex AI Extension UI
 
