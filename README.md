@@ -17,7 +17,7 @@
 
 1. Browse to the [Vertex AI Extensions Page](https://console.cloud.google.com/vertex-ai/extensions)
 2. Click `Create New Extension`
-3. Fill in the fields of the form. See screenshots for example values.
+3. Fill in the fields of the form, choosing `extension.yaml` from the `astra-crud-extension-api` as your OpenAPI spec. See screenshots for example values.
 
 ![Example of Registering Astra Extension](images/vertexai1.png)
 ![Example of Registering Astra Extension](images/vertexai2.png)
