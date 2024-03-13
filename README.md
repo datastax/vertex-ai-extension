@@ -110,10 +110,17 @@
 
 ## Running your Extension
 
-You can now run your extension, either testing from the Vertex AI Extensions UI, or via Python like so:
+You can now run your extension, either testing from the Vertex AI Extensions UI, or via Python like so, replacing the values provided with the values for our extension:
 
 ```python
+from google.cloud.aiplatform.private_preview import llm_extension
 
+extension_astra = llm_extension.Extension('projects/747469159044/locations/us-central1/extensions/7011612038606618624')
+
+extension_astra.execute("hello", operation_params={})
+extension_astra.execute("readData",
+    operation_params = {},  # TODO: Pass in vector or query!
+)
 ```
 
 ## Getting Started Info from Google
