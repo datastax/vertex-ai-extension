@@ -29,7 +29,10 @@
 
     ```python
     from google.cloud.aiplatform.private_preview import llm_extension
-
+  
+    PROJECT_ID = "integrations-379317"  # @param {type:"string"}
+    BUCKET_NAME = "vai-bucket"
+    EXTENSION_PATH = "astra-crud-extension"
     SECRET_ID = "VERTEX_AI_TOKEN"
 
     # Include multiple selection, invocation, and response examples for best results.
