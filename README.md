@@ -41,62 +41,15 @@ Follow the steps below to register this extension against your Astra DB instance
     from google.cloud.aiplatform.private_preview import llm_extension
   
     PROJECT_ID = "integrations-379317"  # @param {type:"string"}
+    SECRET_ID = "VERTEX_AI_TOKEN"
     BUCKET_NAME = "vai-bucket"
     EXTENSION_PATH = "astra-crud-extension"
-    SECRET_ID = "VERTEX_AI_TOKEN"
-
-    # Include multiple selection, invocation, and response examples for best results.
-    extension_selection_examples = [
-        {
-          "query": "I want to learn about the products",
-          "multi_steps": [{
-              "thought": "I should call astra_tool for this",
-              "extension_execution": {
-                "operation_id": "readData",
-                "extension_instruction": "Describe the product that you want to learn about",
-                "observation": "Product descriptions come from the description field"
-              }
-            },
-            {
-              "thought": "Since the observation was successful, I should respond back to the user with results",
-              "respond_to_user": {}
-            }],
-        },
-        {
-          "query": "I want to insert a new product",
-          "multi_steps": [{
-              "thought": "I should call astra_tool for this",
-              "extension_execution": {
-                "operation_id": "insertData",
-                "extension_instruction": "Insert relevant data into Astra DB",
-                "observation": "Product descriptions come from the description field"
-              }
-            },
-            {
-              "thought": "Since the observation was successful, I should respond back to the user with results",
-              "respond_to_user": {}
-            }],
-        }
-    ]
-    
-    extension_invocation_examples = [{
-          "extension_instruction": "Tell me about your product.",
-          "operation_id": "readData",
-          "thought": "Issue a readData operation request on hello_astra tool",
-          "operation_param": "{\"prompt\": \"Tell me about the product.\"}",
-          "parameters_mentioned": ["prompt"]
-    }]
-    
-    extension_response_examples = [{
-      "operation_id": "readData",
-      "response_template": "{{ response }}",
-    }]
     
     extension_astra = llm_extension.Extension.create(
-        display_name = "astra_tool",
+        display_name = "Perform a CRUD Operation on Astra DB",
         description = "Inserts, loads, updates, or deletes data from Astra DB and returns it to the user",
         manifest = {
-            "name": "Astra CRUD Extension for Vertex AI",
+            "name": "astra_tool",
             "description": "Access and process data from AstraDB",
             "api_spec": {
                 "open_api_gcs_uri": f"gs://{BUCKET_NAME}/{EXTENSION_PATH}/extension.yaml"
@@ -108,12 +61,10 @@ Follow the steps below to register this extension against your Astra DB instance
                     "apiKeySecret": f"projects/{PROJECT_ID}/secrets/{SECRET_ID}/versions/1",
                     "httpElementLocation": "HTTP_IN_HEADER",
                 },
-            },
-            "extension_selection_examples": extension_selection_examples,
-            "extension_invocation_examples": extension_invocation_examples,
-            "extension_response_examples": extension_response_examples,
+            }
         },
     )
+    extension_astra
     ```
 
 3. Confirm extension has been successfully created at <https://console.cloud.google.com/vertex-ai/extensions>
