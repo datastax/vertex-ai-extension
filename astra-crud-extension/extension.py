@@ -16,9 +16,9 @@ def hello_world():
     return jsonify(data)
 
 
-@app.route("/readData", methods=["POST"])
+@app.route("/readData", methods=["GET"])
 def read_astra():
-    params = request.json
+    params = request.args
 
     # Grab the Astra token and api endpoint from the environment
     raw_token = params.get("token", request.headers.get("token"))

@@ -11,13 +11,6 @@ paths:
     get:
       operationId: hello
       summary: A simple hello world endpoint
-      parameters:
-        - name: token
-          in: header
-          description: The token to be used for the request
-          required: false
-          schema:
-            type: string
       responses:
         '200':
           description: Successful response
@@ -29,25 +22,9 @@ paths:
                   message:
                     type: string
   /readData:
-    post:
+    get:
       operationId: readData
       summary: Search for data within the database
-      parameters:
-        - name: token
-          in: header
-          description: The token to be used for the request
-          required: true
-          schema:
-            type: string
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                filter:
-                  type: object
       responses:
         '200':
           description: Successful response
@@ -61,13 +38,6 @@ paths:
     post:
       operationId: updateData
       summary: Update existing data within the database
-      parameters:
-        - name: token
-          in: header
-          description: The token to be used for the request
-          required: true
-          schema:
-            type: string
       requestBody:
         required: true
         content:
@@ -92,13 +62,6 @@ paths:
     post:
       operationId: insertData
       summary: Insert new data into the database
-      parameters:
-        - name: token
-          in: header
-          description: The token to be used for the request
-          required: true
-          schema:
-            type: string
       requestBody:
         required: true
         content:
@@ -121,13 +84,6 @@ paths:
     post:
       operationId: deleteData
       summary: Delete existing data within the database
-      parameters:
-        - name: token
-          in: header
-          description: The token to be used for the request
-          required: true
-          schema:
-            type: string
       requestBody:
         required: true
         content:
