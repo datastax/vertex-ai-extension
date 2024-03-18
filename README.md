@@ -64,6 +64,7 @@ Follow the steps below to register this extension against your Astra DB instance
             }
         },
     )
+    
     extension_astra
     ```
 
