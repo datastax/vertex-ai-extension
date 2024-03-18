@@ -77,7 +77,7 @@ You can now run your extension, either testing from the Vertex AI Extensions UI,
 ```python
 from google.cloud.aiplatform.private_preview import llm_extension
 
-extension_astra = llm_extension.Extension('projects/747469159044/locations/us-central1/extensions/7011612038606618624')
+extension_astra = llm_extension.Extension('projects/[PROJECT_ID_NUM]/locations/us-central1/extensions/[EXTENSION_ID_NUM]')
 
 extension_astra.execute("hello", operation_params={})
 extension_astra.execute("readData",
