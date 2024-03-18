@@ -1,4 +1,4 @@
-# Vertex AI Extension
+ # Vertex AI Extension
 
 This Vertex AI Extension integrates with Astra DB to allow for CRUD operations to be performed, using natural language, against your Astra Database instance. The supported operations are:
 
@@ -40,7 +40,7 @@ Follow the steps below to register this extension against your Astra DB instance
     ```python
     from google.cloud.aiplatform.private_preview import llm_extension
   
-    PROJECT_ID = "integrations-379317"  # @param {type:"string"}
+    PROJECT_ID = "[PROJECT_ID]"  # @param {type:"string"}
     SECRET_ID = "VERTEX_AI_TOKEN"
     BUCKET_NAME = "vai-bucket"
     EXTENSION_PATH = "astra-crud-extension"
@@ -84,21 +84,12 @@ extension_astra.execute("readData",
 )
 ```
 
-## Getting Started Info from Google
-
-- The following project numbers are allowlisted to Vertex Extensions:
-  - Project Number(s): 747469159044 (Integrations Project)
-- To get started:
-  - First, [download the SDK here](https://console.cloud.google.com/storage/browser/vertex_ai_extensions_sdk_private_releases;tab=objects?forceOnBucketsSortingFiltering=true&project=vertex-sdk-dev&prefix=&forceOnObjectsSortingFiltering=false)
-  - Then, access the [Colab notebook here](https://drive.google.com/drive/folders/17GbwWPaOq3GR1GTg_yxQRao6R_gpGplY) (includes tutorial & documentation)
-- [Documentation](https://cloud.google.com/vertex-ai/docs/generative-ai/extensions/private/overview)
-
 ## For Astra Developers
 
-Use of the extension required a deployed cloud run container.
+Use of the extension requires a deployed cloud run container.
 
 1. If you have not already, ensure that you have authenticated with Google Cloud `gcloud auth login`
-2. If you have not already, ensure that you have set your project id with `gcloud config set project integrations-379317`
-3. `docker build --platform linux/amd64 -t us-central1-docker.pkg.dev/integrations-379317/astra-api/astra-crud:20240312 astra-crud-extension`
-4. `docker push us-central1-docker.pkg.dev/integrations-379317/astra-api/astra-crud:20240312`
+2. If you have not already, ensure that you have set your project id with `gcloud config set project [PROJECT_ID]`
+3. `docker build --platform linux/amd64 -t us-central1-docker.pkg.dev/[PROJECT_ID]/astra-api/astra-crud:20240312 astra-crud-extension`
+4. `docker push us-central1-docker.pkg.dev/[PROJECT_ID]/astra-api/astra-crud:20240312`
 5. Register the container artifact in [Cloud Run](https://console.cloud.google.com/run/create)
