@@ -86,7 +86,7 @@ def update_astra():
 
     # Optional Params for the astra call
     filter = params.get("filter", None)
-    field_update = params.get("fieldUpdate", 1)
+    field_update = {"$set": params.get("fieldUpdate", 1)}
 
     # Call the vector find operation
     astra_db = AstraDB(token=token, api_endpoint=api_endpoint)
