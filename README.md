@@ -1,6 +1,6 @@
- # Vertex AI Extension
+ # Astra DB Vertex AI Extension
 
-This Vertex AI Extension integrates with Astra DB to allow for CRUD operations to be performed, using natural language, against your Astra Database instance. The supported operations are:
+The Astra DB Vertex AI Extension allows users to perform CRUD operations, using natural language, against their Astra databases. The supported operations are:
 
 - readData
 - insertData
