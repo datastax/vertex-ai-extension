@@ -9,11 +9,9 @@ import uuid
 app = Flask(__name__)
 
 
-@app.route("/hello", methods=["GET"])
-def hello_world():
-    data = {"message": "Hello, World!"}
-    
-    return jsonify(data)
+@app.route('/health', methods=['GET'])
+def health_check():
+    return jsonify({'status': 'UP'}), 200
 
 
 @app.route("/readData", methods=["GET"])
