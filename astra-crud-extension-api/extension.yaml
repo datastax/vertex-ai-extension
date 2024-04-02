@@ -22,9 +22,19 @@ paths:
                   message:
                     type: string
   /readData:
-    get:
+    post:
       operationId: readData
-      summary: Search for data within the database
+      summary: Search for data within the database using a filter
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                filter:
+                  type: object
+                  description: Key-value pairs to filter the data
       responses:
         '200':
           description: Successful response

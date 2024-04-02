@@ -13,9 +13,9 @@ def health_check():
     return jsonify({'status': 'UP'}), 200
 
 
-@app.route("/readData", methods=["GET"])
+@app.route("/readData", methods=["POST"])
 def read_astra():
-    params = request.args
+    params = request.json
 
     # Grab the Astra token and api endpoint from the environment
     raw_token = params.get("token", request.headers.get("token"))
@@ -36,7 +36,16 @@ def read_astra():
     # Call the vector find operation
     astra_db = AstraDB(token=token, api_endpoint=api_endpoint)
     astra_db_collection = astra_db.collection(table)
-    data = astra_db_collection.find(filter=filter)
+    
+    # Get the count of documents from Astra DB
+    astra_docs_count = astra_db_collection.count_documents(filter=filter)
+    
+    # Perform the find operation
+    data = list(astra_db_collection.paginated_find(
+        filter=filter,
+        projection={"$vector": 0},
+        options={"limit": astra_docs_count["status"]["count"]}
+    ))
 
     return jsonify(data), 200
 
