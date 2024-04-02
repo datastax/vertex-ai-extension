@@ -32,13 +32,13 @@ The steps on this page assume the following:
     git clone git@github.com:datastax/vertex-ai-extension.git
     ```
 
-2. In the <a href="https://console.cloud.google.com/security/secret-manager" target="_blank">Google Secrets Manager</a>, create a secret for your **Astra DB Credentials**, named `DATASTAX_VERTEX_AI_TOKEN`, the format of which is as follows: `<ASTRA_DB_APPLICATION_TOKEN>;<ASTRA_DB_API_ENDPOINT>;<ASTRA_DB_TABLE>`. **These values can be found in your Astra DB Portal after creating a database. See the above documentation links for more information**
+2. In the [Google Secrets Manager](https://console.cloud.google.com/security/secret-manager), create a secret for your **Astra DB Credentials**, named `DATASTAX_VERTEX_AI_TOKEN`, the format of which is as follows: `[ASTRA_DB_APPLICATION_TOKEN];[ASTRA_DB_API_ENDPOINT];[ASTRA_DB_TABLE]`. **These values can be found in your Astra DB Portal after creating a database. See the above documentation links for more information**
 3. Grant the Secrets Manager Secret Accessor permission in GCP to the required principal, i.e., your own account if registering the extension manually or the appropriate service account
 4. Next, choose either a UI or Python-based method of registering the extension
 
 ### Using the Vertex AI Extension UI
 
-1. Browse to the <a href="https://console.cloud.google.com/vertex-ai/extensions" target="_blank">Vertex AI Extensions Page</a>
+1. Browse to the [Vertex AI Extensions Page](https://console.cloud.google.com/vertex-ai/extensions)
 2. Click `Create Extension`
 3. Fill in the fields of the form, choosing `extension.yaml` from the `astra-crud-extension-api` as your OpenAPI spec. See screenshots for example values. Note that you **must specify the API key secret field in the following format: `projects/[PROJECT_ID_NUM]/secrets/DATASTAX_VERTEX_AI_TOKEN/versions/latest`** you can find the value for `PROJECT_ID_NUM` on the landing page of GCP for your project.
 
@@ -84,7 +84,7 @@ The steps on this page assume the following:
     extension_astra
     ```
 
-6. Confirm extension has been successfully created at the <a href='https://console.cloud.google.com/vertex-ai/extensions' target='_blank'>Extensions Page</a>
+6. Confirm extension has been successfully created at the [Extensions Page](https://console.cloud.google.com/vertex-ai/extensions)
 
 ## Running your Extension
 
@@ -105,4 +105,4 @@ Use of the extension requires a deployed cloud run container.
 2. If you have not already, ensure that you have set your project id with `gcloud config set project [PROJECT_ID]`
 3. To build the container, run `docker build --platform linux/amd64 -t gcr.io/[PROJECT_ID]/astra-crud astra-crud-extension`
 4. To push the image, run `docker push gcr.io/[PROJECT_ID]/astra-crud`
-5. Register the container artifact in <a href='https://console.cloud.google.com/run/create' target='_blank'>Cloud Run</a>
+5. Register the container artifact in [Cloud Run](https://console.cloud.google.com/run/create)
