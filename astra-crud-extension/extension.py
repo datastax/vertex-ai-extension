@@ -1,9 +1,8 @@
-from flask import Flask, jsonify, request
-
-from astrapy.db import AstraDB
 
 import os
-import uuid
+
+from flask import Flask, jsonify, request
+from astrapy.db import AstraDB
 
 
 app = Flask(__name__)
@@ -34,7 +33,7 @@ def read_astra():
     astra_db_collection = astra_db.collection(table)
     data = astra_db_collection.find(filter=filter)
 
-    return jsonify(data)
+    return jsonify(data), 200
 
 
 @app.route("/insertData", methods=["POST"])
@@ -49,16 +48,12 @@ def insert_astra():
     if not api_endpoint:
         return jsonify({"error": "api_endpoint not provided"})
 
-    # Some example data
-    doc = {
-        "_id": str(uuid.uuid4()),
-        "name": "Coded Cleats Copy",
-        "description": "ChatGPT integrated sneakers that talk to you",
-        "$vector": [0.25, 0.25, 0.25, 0.25, 0.25],
-    }
-
     # Optional Params for the astra call
-    data = params.get("data", doc)
+    data = params.get("data")
+
+    # Fail if no data is provided
+    if not data:
+        return jsonify({"error": "Please provide data to insert"})
 
     # Initialize our vector db
     astra_db = AstraDB(token=token, api_endpoint=api_endpoint)
@@ -67,7 +62,7 @@ def insert_astra():
     # Insert a document into the test collection
     data = astra_db_collection.insert_one(data)
 
-    return jsonify(data)
+    return jsonify(data), 201
 
 
 @app.route("/updateData", methods=["POST"])
@@ -91,7 +86,7 @@ def update_astra():
     astra_db_collection = astra_db.collection(table)
     data = astra_db_collection.find_one_and_update(filter=filter, update=field_update)
 
-    return jsonify(data)
+    return jsonify(data), 200
 
 
 @app.route("/deleteData", methods=["POST"])
@@ -114,7 +109,7 @@ def delete_astra():
     astra_db_collection = astra_db.collection(table)
     data = astra_db_collection.delete_many(filter=filter)
 
-    return jsonify(data)
+    return jsonify(data), 202
 
 
 if __name__ == "__main__":
