@@ -33,7 +33,8 @@ The steps on this page assume the following:
     ```
 
 2. In the <a href="https://console.cloud.google.com/security/secret-manager" target="_blank">Google Secrets Manager</a>, create a secret for your **Astra DB Credentials**, named `DATASTAX_VERTEX_AI_TOKEN`, the format of which is as follows: `<ASTRA_DB_APPLICATION_TOKEN>;<ASTRA_DB_API_ENDPOINT>;<ASTRA_DB_TABLE>`.
-3. Next, choose either a UI or Python-based method of registering the extension
+3. Grant permissions on this secret to the required principal, i.e., your own account if registering the extension manually or the appropriate service account
+4. Next, choose either a UI or Python-based method of registering the extension
 
 ### Using the Vertex AI Extension UI
 
