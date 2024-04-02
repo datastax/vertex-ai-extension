@@ -5,7 +5,7 @@ info:
   description: An extension to perform CRUD actions on data within your Astra Database.
   version: 1.0.0
 servers:
-  - url: 'https://astra-crud-extension-we3tzahyyq-uc.a.run.app'
+  - url: 'https://astra-crud-we3tzahyyq-uc.a.run.app'
 paths:
   /health:
     get:
