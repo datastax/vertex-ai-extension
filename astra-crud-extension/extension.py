@@ -76,7 +76,7 @@ def insert_astra():
 
     # Initialize our vector db
     astra_db = AstraDB(token=token, api_endpoint=api_endpoint)
-    astra_db_collection = astra_db.create_collection(table, dimension=5)
+    astra_db_collection = astra_db.collection(table, dimension=5)
 
     # Insert a document into the test collection
     data = astra_db_collection.insert_one(data)
