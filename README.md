@@ -1,6 +1,6 @@
  # Astra DB Vertex AI Extension
 
-The Astra DB Vertex AI Extension allows users to perform CRUD operations, using natural language, against their Astra databases. The supported operations are:
+The Astra DB Vertex AI Extension allows users to perform CRUD operations against their Astra databases using natural language. The supported operations are:
 
 - readData
 - insertData
@@ -10,6 +10,15 @@ The Astra DB Vertex AI Extension allows users to perform CRUD operations, using 
 Follow the steps below to register this extension against your Astra DB instance.
 
 ## Installation
+
+The steps on this page assume the following:
+
+* You have an active [Astra account](https://astra.datastax.com/signup).
+* You have an active [Vertex account](https://cloud.google.com/vertex-ai/) account.
+* You have created an [Astra Serverless (Vector) database](https://docs.datastax.com/en/astra/astra-db-vector/databases/create-database.html#create-vector-database) and created an [https://docs.datastax.com/en/astra/astra-db-vector/administration/manage-application-tokens.html](Astra application token).
+* You have a GCP project with:
+    * The Vertex API enabled. For more, see [Get set up on Google Cloud](https://cloud.google.com/vertex-ai/docs/start/cloud-environment).
+    * The Vertex AI Administrator (roles/aiplatform.admin) or Vertex AI User (roles/aiplatform.user) roles assigned to users or service accounts in your project. For more, see [Vertex AI access control with IAM](https://cloud.google.com/vertex-ai/docs/general/access-control).
 
 ### Initial Steps
 
