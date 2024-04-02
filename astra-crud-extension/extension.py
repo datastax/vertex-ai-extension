@@ -19,6 +19,11 @@ def read_astra():
 
     # Grab the Astra token and api endpoint from the environment
     raw_token = params.get("token", request.headers.get("token"))
+
+    # Fail if there is no token
+    if not raw_token:
+        return jsonify({"error": "Please provide a token"})
+
     token, api_endpoint, table = raw_token.split(";")
 
     # Error out if we don't have the token or api_endpoint
@@ -42,6 +47,11 @@ def insert_astra():
 
     # Grab the Astra token and api endpoint from the environment
     raw_token = params.get("token", request.headers.get("token"))
+
+    # Fail if there is no token
+    if not raw_token:
+        return jsonify({"error": "Please provide a token"})
+
     token, api_endpoint, table = raw_token.split(";")
 
     # Error out if we don't have the token or api_endpoint
@@ -71,6 +81,11 @@ def update_astra():
 
     # Grab the Astra token and api endpoint from the environment
     raw_token = params.get("token", request.headers.get("token"))
+
+    # Fail if there is no token
+    if not raw_token:
+        return jsonify({"error": "Please provide a token"})
+
     token, api_endpoint, table = raw_token.split(";")
 
     # Error out if we don't have the token or api_endpoint
@@ -95,6 +110,11 @@ def delete_astra():
 
     # Grab the Astra token and api endpoint from the environment
     raw_token = params.get("token", request.headers.get("token"))
+
+    # Fail if there is no token
+    if not raw_token:
+        return jsonify({"error": "Please provide a token"})
+
     token, api_endpoint, table = raw_token.split(";")
 
     # Error out if we don't have the token or api_endpoint
