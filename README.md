@@ -29,7 +29,7 @@ The steps on this page assume the following:
 1. Clone the repository:
 
     ```bash
-    git clone git@github.com:riptano/vertex-ai-extension.git
+    git clone git@github.com:datastax/vertex-ai-extension.git
     ```
 
 2. In the <a href="https://console.cloud.google.com/security/secret-manager" target="_blank">Google Secrets Manager</a>, create a secret for your **Astra DB Credentials**, named `DATASTAX_VERTEX_AI_TOKEN`, the format of which is as follows: `<ASTRA_DB_APPLICATION_TOKEN>;<ASTRA_DB_API_ENDPOINT>;<ASTRA_DB_TABLE>`. **These values can be found in your Astra DB Portal after creating a database. See the above documentation links for more information**
