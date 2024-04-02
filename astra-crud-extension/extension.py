@@ -79,7 +79,7 @@ def insert_astra():
     astra_db_collection = astra_db.collection(table)
 
     # Insert a document into the test collection
-    data = astra_db_collection.insert_one(data)
+    data = astra_db_collection.insert_many(data)
 
     return jsonify(data), 201
 
@@ -108,7 +108,8 @@ def update_astra():
     # Call the vector find operation
     astra_db = AstraDB(token=token, api_endpoint=api_endpoint)
     astra_db_collection = astra_db.collection(table)
-    data = astra_db_collection.find_one_and_update(filter=filter, update=field_update)
+
+    data = astra_db_collection.update_many(filter=filter, update=field_update)
 
     return jsonify(data), 200
 

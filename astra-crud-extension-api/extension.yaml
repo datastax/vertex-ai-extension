@@ -80,7 +80,9 @@ paths:
               type: object
               properties:
                 data:
-                  type: object
+                  type: array
+                  items:
+                    type: object
       responses:
         '200':
           description: Data inserted successfully
