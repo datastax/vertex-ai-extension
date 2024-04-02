@@ -95,7 +95,7 @@ from google.cloud.aiplatform.private_preview import llm_extension
 
 extension_astra = llm_extension.Extension('projects/[PROJECT_ID_NUM]/locations/us-central1/extensions/[EXTENSION_ID_NUM]')
 
-extension_astra.execute("hello", operation_params={})
+extension_astra.execute("health", operation_params={})
 extension_astra.execute("readData",
     operation_params = {},
 )
