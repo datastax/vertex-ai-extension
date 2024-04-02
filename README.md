@@ -88,13 +88,9 @@ The steps on this page assume the following:
 
 ## Running your Extension
 
-You can now run your extension, either testing from the Vertex AI Extensions UI, or via Python like so, replacing the values provided with the values for our extension:
+You can now run your extension, either testing from the Vertex AI Extensions UI, or via Python like so:
 
 ```python
-from google.cloud.aiplatform.private_preview import llm_extension
-
-extension_astra = llm_extension.Extension('projects/[PROJECT_ID_NUM]/locations/us-central1/extensions/[EXTENSION_ID_NUM]')
-
 extension_astra.execute("health", operation_params={})
 extension_astra.execute("readData",
     operation_params = {},
