@@ -40,7 +40,7 @@ The steps on this page assume the following:
 
 1. Browse to the <a href="https://console.cloud.google.com/vertex-ai/extensions" target="_blank">Vertex AI Extensions Page</a>
 2. Click `Create Extension`
-3. Fill in the fields of the form, choosing `extension.yaml` from the `astra-crud-extension-api` as your OpenAPI spec. See screenshots for example values.
+3. Fill in the fields of the form, choosing `extension.yaml` from the `astra-crud-extension-api` as your OpenAPI spec. See screenshots for example values. Note that you **must specify the API key secret field in the following format: `projects/[PROJECT_ID_NUM]/secrets/DATASTAX_VERTEX_AI_TOKEN/versions/latest`** you can find the value for `PROJECT_ID_NUM` on the landing page of GCP for your project.
 
 ![Example of Registering Astra Extension](images/vertexai1.png)
 ![Example of Registering Astra Extension](images/vertexai2.png)
