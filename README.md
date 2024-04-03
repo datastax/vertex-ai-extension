@@ -57,7 +57,9 @@ The steps on this page assume the following:
 8. Your Cloud Run service URL must be added to `astra-crud-extension-api/extension.yaml`, replacing `[YOUR_CLOUD_RUN_SERVICE_URL]` on line 8.
 9. Next, choose either a UI or Python-based method of registering the extension
 
-### Using the Vertex AI Extension UI
+### Deploying your Vertex AI Extension
+
+#### Using the Vertex AI Extension UI
 
 1. Browse to the [Vertex AI Extensions Page](https://console.cloud.google.com/vertex-ai/extensions)
 2. Click `Create Extension`
@@ -66,7 +68,7 @@ The steps on this page assume the following:
 ![Example of Registering Astra Extension](images/vertexai1.png)
 ![Example of Registering Astra Extension](images/vertexai2.png)
 
-### Using the Python SDK
+#### Using the Python SDK
 
 1. If you have not already, ensure that you have authenticated with Google Cloud `gcloud auth login`
 2. If you have not already, ensure that you have set your project id with `gcloud config set project [PROJECT_ID]`
