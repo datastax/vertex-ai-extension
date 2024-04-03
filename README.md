@@ -34,7 +34,28 @@ The steps on this page assume the following:
 
 2. In the [Google Secrets Manager](https://console.cloud.google.com/security/secret-manager), create a secret for your **Astra DB Credentials**, named `DATASTAX_VERTEX_AI_TOKEN`, the format of which is as follows: `[ASTRA_DB_APPLICATION_TOKEN];[ASTRA_DB_API_ENDPOINT];[ASTRA_DB_TABLE]`. **These values can be found in your Astra DB Portal after creating a database. See the above documentation links for more information**
 3. Grant the Secrets Manager Secret Accessor permission in GCP to the required principal, i.e., your own account if registering the extension manually or the appropriate service account
-4. Next, choose either a UI or Python-based method of registering the extension
+4. Next, you must deploy the Docker Container to Cloud Run.
+
+### Deploying your Container
+
+1. If you have not already, ensure that you have authenticated with Google Cloud `gcloud auth login`
+2. If you have not already, ensure that you have set your project id with `gcloud config set project [PROJECT_ID]`
+3. Set the authentication for the Cloud Run Service, by granting the role Cloud Run Invoker to allAuthenticatedUsers
+4. Create a repository for the container by running (more information [here](https://cloud.google.com/artifact-registry/docs/repositories/create-repos#create-gcloud)):
+
+    ```bash
+    gcloud artifacts repositories create astra-api \
+    --repository-format=docker \
+    --location=us-central1 \
+    --description="Vertex AI Extension Container for Astra DB" \
+    --async
+    ```
+
+5. To build the container, run the following, replacing `[PROJECT_ID]`: `docker build --platform linux/amd64 -t us-central1-docker.pkg.dev/[PROJECT_ID]/astra-api/astra-crud astra-crud-extension`
+6. To push the image, run the following, replacing `[PROJECT_ID]`: `docker push us-central1-docker.pkg.dev/[PROJECT_ID]/astra-api/astra-crud`
+7. Register the container artifact as a service in [Cloud Run](https://console.cloud.google.com/run/create). Once deployed, you will receive a Cloud Run service URL.
+8. Your Cloud Run service URL must be added to `astra-crud-extension-api/extension.yaml`, replacing `[YOUR_CLOUD_RUN_SERVICE_URL]` on line 8.
+9. Next, choose either a UI or Python-based method of registering the extension
 
 ### Using the Vertex AI Extension UI
 
@@ -96,13 +117,3 @@ extension_astra.execute("readData",
     operation_params = {},
 )
 ```
-
-## For Astra Developers
-
-Use of the extension requires a deployed cloud run container.
-
-1. If you have not already, ensure that you have authenticated with Google Cloud `gcloud auth login`
-2. If you have not already, ensure that you have set your project id with `gcloud config set project [PROJECT_ID]`
-3. To build the container, run `docker build --platform linux/amd64 -t gcr.io/[PROJECT_ID]/astra-crud astra-crud-extension`
-4. To push the image, run `docker push gcr.io/[PROJECT_ID]/astra-crud`
-5. Register the container artifact in [Cloud Run](https://console.cloud.google.com/run/create)
