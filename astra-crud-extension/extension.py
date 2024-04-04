@@ -102,7 +102,12 @@ def update_astra():
         return jsonify({"error": "api_endpoint not provided"})
 
     # Optional Params for the astra call
-    filter = params.get("filter", None)
+    filter = params.get("filter")
+
+    # Fail if no filter is provided
+    if not filter:
+        return jsonify({"error": "Please provide a filter for the update"})
+
     field_update = {"$set": params.get("fieldUpdate", 1)}
 
     # Connect to the Astra DB and table
