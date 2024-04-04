@@ -40,14 +40,14 @@ def read_astra():
     # Get the count of documents from Astra DB
     astra_docs_count = astra_db_collection.count_documents(filter=filter)
     
-    # Perform the find operation
-    data = list(astra_db_collection.paginated_find(
+    # Perform the find/read operation
+    result = list(astra_db_collection.paginated_find(
         filter=filter,
         projection={"$vector": 0},
         options={"limit": astra_docs_count["status"]["count"]}
     ))
 
-    return jsonify(data), 200
+    return jsonify(result), 200
 
 
 @app.route("/insertData", methods=["POST"])
@@ -78,10 +78,10 @@ def insert_astra():
     astra_db = AstraDB(token=token, api_endpoint=api_endpoint)
     astra_db_collection = astra_db.collection(table)
 
-    # Insert a document into the test collection
-    data = astra_db_collection.insert_many(data)
+    # Insert the document(s) into the collection
+    result = astra_db_collection.insert_many(data)
 
-    return jsonify(data), 201
+    return jsonify(result), 201
 
 
 @app.route("/updateData", methods=["POST"])
@@ -105,13 +105,14 @@ def update_astra():
     filter = params.get("filter", None)
     field_update = {"$set": params.get("fieldUpdate", 1)}
 
-    # Call the vector find operation
+    # Connect to the Astra DB and table
     astra_db = AstraDB(token=token, api_endpoint=api_endpoint)
     astra_db_collection = astra_db.collection(table)
 
-    data = astra_db_collection.update_many(filter=filter, update=field_update)
+    # Perform the update operation
+    result = astra_db_collection.update_many(filter=filter, update=field_update)
 
-    return jsonify(data), 200
+    return jsonify(result), 200
 
 
 @app.route("/deleteData", methods=["POST"])
@@ -137,9 +138,11 @@ def delete_astra():
     # Call the vector find operation
     astra_db = AstraDB(token=token, api_endpoint=api_endpoint)
     astra_db_collection = astra_db.collection(table)
-    data = astra_db_collection.delete_many(filter=filter)
 
-    return jsonify(data), 202
+    # Perform the delete operation
+    result = astra_db_collection.delete_many(filter=filter)
+
+    return jsonify(result), 202
 
 
 if __name__ == "__main__":
