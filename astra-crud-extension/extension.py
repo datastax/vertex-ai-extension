@@ -33,9 +33,12 @@ def read_astra():
     # Optional Params for the astra call
     filter = params.get("filter", None)
 
-    # Call the vector find operation
-    astra_db = AstraDB(token=token, api_endpoint=api_endpoint)
-    astra_db_collection = astra_db.collection(table)
+    # Attempt to connect to Astra DB
+    try:
+        astra_db = AstraDB(token=token, api_endpoint=api_endpoint)
+        astra_db_collection = astra_db.collection(table)
+    except Exception as e:
+        return jsonify({"error": str(e)})
     
     # Get the count of documents from Astra DB
     astra_docs_count = astra_db_collection.count_documents(filter=filter)
@@ -74,9 +77,12 @@ def insert_astra():
     if not data:
         return jsonify({"error": "Please provide data to insert"})
 
-    # Initialize our vector db
-    astra_db = AstraDB(token=token, api_endpoint=api_endpoint)
-    astra_db_collection = astra_db.collection(table)
+    # Attempt to connect to Astra DB
+    try:
+        astra_db = AstraDB(token=token, api_endpoint=api_endpoint)
+        astra_db_collection = astra_db.collection(table)
+    except Exception as e:
+        return jsonify({"error": str(e)})
 
     # Insert the document(s) into the collection
     result = astra_db_collection.insert_many(data)
@@ -110,9 +116,12 @@ def update_astra():
 
     field_update = {"$set": params.get("fieldUpdate", 1)}
 
-    # Connect to the Astra DB and table
-    astra_db = AstraDB(token=token, api_endpoint=api_endpoint)
-    astra_db_collection = astra_db.collection(table)
+    # Attempt to connect to Astra DB
+    try:
+        astra_db = AstraDB(token=token, api_endpoint=api_endpoint)
+        astra_db_collection = astra_db.collection(table)
+    except Exception as e:
+        return jsonify({"error": str(e)})
 
     # Perform the update operation
     result = astra_db_collection.update_many(filter=filter, update=field_update)
@@ -140,9 +149,12 @@ def delete_astra():
     # Optional Params for the astra call
     filter = params.get("filter", None)
 
-    # Call the vector find operation
-    astra_db = AstraDB(token=token, api_endpoint=api_endpoint)
-    astra_db_collection = astra_db.collection(table)
+    # Attempt to connect to Astra DB
+    try:
+        astra_db = AstraDB(token=token, api_endpoint=api_endpoint)
+        astra_db_collection = astra_db.collection(table)
+    except Exception as e:
+        return jsonify({"error": str(e)})
 
     # Perform the delete operation
     result = astra_db_collection.delete_many(filter=filter)
