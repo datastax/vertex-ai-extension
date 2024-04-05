@@ -35,7 +35,12 @@ def read_astra():
 
     # Attempt to connect to Astra DB
     try:
-        astra_db = AstraDB(token=token, api_endpoint=api_endpoint)
+        astra_db = AstraDB(
+            token=token,
+            api_endpoint=api_endpoint,
+            caller_name="vertex-ai-extension",
+            caller_version="0.1.0"  # TODO: Version this
+        )
         astra_db_collection = astra_db.collection(table)
     except Exception as e:
         return jsonify({"error": str(e)})
@@ -79,7 +84,12 @@ def insert_astra():
 
     # Attempt to connect to Astra DB
     try:
-        astra_db = AstraDB(token=token, api_endpoint=api_endpoint)
+        astra_db = AstraDB(
+            token=token,
+            api_endpoint=api_endpoint,
+            caller_name="vertex-ai-extension",
+            caller_version="0.1.0"  # TODO: Version this
+        )
         astra_db_collection = astra_db.collection(table)
     except Exception as e:
         return jsonify({"error": str(e)})
@@ -118,7 +128,12 @@ def update_astra():
 
     # Attempt to connect to Astra DB
     try:
-        astra_db = AstraDB(token=token, api_endpoint=api_endpoint)
+        astra_db = AstraDB(
+            token=token,
+            api_endpoint=api_endpoint,
+            caller_name="vertex-ai-extension",
+            caller_version="0.1.0"  # TODO: Version this
+        )
         astra_db_collection = astra_db.collection(table)
     except Exception as e:
         return jsonify({"error": str(e)})
@@ -151,7 +166,12 @@ def delete_astra():
 
     # Attempt to connect to Astra DB
     try:
-        astra_db = AstraDB(token=token, api_endpoint=api_endpoint)
+        astra_db = AstraDB(
+            token=token,
+            api_endpoint=api_endpoint,
+            caller_name="vertex-ai-extension",
+            caller_version="0.1.0"  # TODO: Version this
+        )
         astra_db_collection = astra_db.collection(table)
     except Exception as e:
         return jsonify({"error": str(e)})
