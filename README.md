@@ -47,7 +47,7 @@ The steps on this page assume the following:
     gcloud artifacts repositories create astra-api \
     --repository-format=docker \
     --location=us-central1 \
-    --description="Vertex AI Extension Container for Astra DB" \
+    --description="Vertex AI Containers for Astra DB" \
     --async
     ```
 
