@@ -81,7 +81,7 @@ async def read_astra(
     return result, 200
 
 
-@app.route("/insertData", methods=["POST"])
+@app.post("/insertData", status_code=201)
 async def insert_astra(
     params: InsertParams = Depends(),
     raw_token: Annotated[str | None, Header(alias="token")] = None,
@@ -118,10 +118,10 @@ async def insert_astra(
     # Insert the document(s) into the collection
     result = astra_db_collection.insert_many(data)
 
-    return result, 201
+    return result
 
 
-@app.route("/updateData", methods=["POST"])
+@app.post("/updateData", status_code=200)
 async def update_astra(
     params: UpdateParams = Depends(),
     raw_token: Annotated[str | None, Header(alias="token")] = None,
@@ -160,10 +160,10 @@ async def update_astra(
     # Perform the update operation
     result = astra_db_collection.update_many(filter=filter, update=field_update)
 
-    return result, 200
+    return result
 
 
-@app.route("/deleteData", methods=["POST"])
+@app.post("/deleteData", status_code=202)
 async def delete_astra(
     params: DeleteParams = Depends(),
     raw_token: Annotated[str | None, Header(alias="token")] = None,
@@ -196,7 +196,7 @@ async def delete_astra(
     # Perform the delete operation
     result = astra_db_collection.delete_many(filter=filter)
 
-    return result, 202
+    return result
 
 
 if __name__ == "__main__":
