@@ -1,7 +1,7 @@
 import os
 import uvicorn
+import astrapy
 
-from astrapy.db import AstraDB
 from fastapi import Depends, FastAPI, Header
 from pydantic import BaseModel
 from typing import Annotated, Any
@@ -9,10 +9,13 @@ from typing import Annotated, Any
 
 app = FastAPI()
 
-
 CALLER_NAME = "vertex-ai-extension"
 CALLER_VERSION = "0.1.0"  # TODO: Proper versioning
 
+my_client = astrapy.DataAPIClient(
+    caller_name=CALLER_NAME,
+    caller_version=CALLER_VERSION,
+)
 
 class ReadParams(BaseModel):
     filter: dict[str, Any] = {}
@@ -52,33 +55,28 @@ async def read_astra(
         return {"error": "api_endpoint not provided"}
 
     # Optional Params for the astra call
-    filter = params.filter
+    filter = params.filter.get('filter', {})
 
     # Attempt to connect to Astra DB
     try:
-        astra_db = AstraDB(
-            token=token,
+        my_database = my_client.get_database(
             api_endpoint=api_endpoint,
-            caller_name=CALLER_NAME,
-            caller_version=CALLER_VERSION,
+            token=token,
         )
-        astra_db_collection = astra_db.collection(table)
+        astra_db_collection = my_database.get_collection(table)
     except Exception as e:
         return {"error": str(e)}
 
-    # Get the count of documents from Astra DB
-    astra_docs_count = astra_db_collection.count_documents(filter=filter)
-
     # Perform the find/read operation
-    result = list(
-        astra_db_collection.paginated_find(
-            filter=filter,
-            projection={"$vector": 0},
-            options={"limit": astra_docs_count["status"]["count"]},
-        )
+    cursor = astra_db_collection.find(
+        filter=filter,
     )
 
-    return result, 200
+    results = []
+    for result in cursor:
+        results.append(result)
+
+    return results, 200
 
 
 @app.post("/insertData", status_code=201)
@@ -105,13 +103,11 @@ async def insert_astra(
 
     # Attempt to connect to Astra DB
     try:
-        astra_db = AstraDB(
-            token=token,
+        my_database = my_client.get_database(
             api_endpoint=api_endpoint,
-            caller_name=CALLER_NAME,
-            caller_version=CALLER_VERSION,
+            token=token,
         )
-        astra_db_collection = astra_db.collection(table)
+        astra_db_collection = my_database.get_collection(table)
     except Exception as e:
         return {"error": str(e)}
 
@@ -137,7 +133,7 @@ async def update_astra(
         return {"error": "api_endpoint not provided"}
 
     # Optional Params for the astra call
-    filter = params.filter
+    filter = params.filter.get('filter', {})
 
     # Fail if no filter is provided
     if not filter:
@@ -147,13 +143,11 @@ async def update_astra(
 
     # Attempt to connect to Astra DB
     try:
-        astra_db = AstraDB(
-            token=token,
+        my_database = my_client.get_database(
             api_endpoint=api_endpoint,
-            caller_name=CALLER_NAME,
-            caller_version=CALLER_VERSION,
+            token=token,
         )
-        astra_db_collection = astra_db.collection(table)
+        astra_db_collection = my_database.get_collection(table)
     except Exception as e:
         return {"error": str(e)}
 
@@ -179,17 +173,15 @@ async def delete_astra(
         return {"error": "api_endpoint not provided"}
 
     # Optional Params for the astra call
-    filter = params.filter
+    filter = params.filter.get('filter', {})
 
     # Attempt to connect to Astra DB
     try:
-        astra_db = AstraDB(
-            token=token,
+        my_database = my_client.get_database(
             api_endpoint=api_endpoint,
-            caller_name=CALLER_NAME,
-            caller_version=CALLER_VERSION,
+            token=token,
         )
-        astra_db_collection = astra_db.collection(table)
+        astra_db_collection = my_database.get_collection(table)
     except Exception as e:
         return {"error": str(e)}
 
