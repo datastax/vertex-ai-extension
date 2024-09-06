@@ -10,7 +10,7 @@ from typing import Annotated, Any
 app = FastAPI()
 
 CALLER_NAME = "vertex-ai-extension"
-CALLER_VERSION = "0.1.0"  # TODO: Proper versioning
+CALLER_VERSION = "0.1.1"  # TODO: Proper versioning
 
 my_client = astrapy.DataAPIClient(
     caller_name=CALLER_NAME,
