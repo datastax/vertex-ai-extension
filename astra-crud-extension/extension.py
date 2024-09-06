@@ -1,34 +1,32 @@
 import os
 import uvicorn
+import astrapy
 
-from astrapy.db import AstraDB
 from fastapi import Depends, FastAPI, Header
 from pydantic import BaseModel
-from typing import Annotated, Any
+from typing import Annotated, Any, List, Dict
 
 
 app = FastAPI()
 
-
 CALLER_NAME = "vertex-ai-extension"
-CALLER_VERSION = "0.1.0"  # TODO: Proper versioning
-
+CALLER_VERSION = "0.1.1"  # TODO: Proper versioning
 
 class ReadParams(BaseModel):
-    filter: dict[str, Any] = {}
+    filter: Dict[str, Any] = {}
 
 
 class InsertParams(BaseModel):
-    data: list
+    data: List[Dict[str, Any]]
 
 
 class UpdateParams(BaseModel):
-    filter: dict
-    fieldUpdate: dict
+    filter: Dict[str, Any]
+    fieldUpdate: Dict[str, Any]
 
 
 class DeleteParams(BaseModel):
-    filter: dict
+    filter: Dict[str, Any]
 
 
 @app.get("/health")
@@ -56,34 +54,33 @@ async def read_astra(
 
     # Attempt to connect to Astra DB
     try:
-        astra_db = AstraDB(
-            token=token,
-            api_endpoint=api_endpoint,
+        my_client = astrapy.DataAPIClient(
             caller_name=CALLER_NAME,
             caller_version=CALLER_VERSION,
         )
-        astra_db_collection = astra_db.collection(table)
+        my_database = my_client.get_database(
+            api_endpoint=api_endpoint,
+            token=token,
+        )
+        astra_db_collection = my_database.get_collection(table)
     except Exception as e:
         return {"error": str(e)}
 
-    # Get the count of documents from Astra DB
-    astra_docs_count = astra_db_collection.count_documents(filter=filter)
-
     # Perform the find/read operation
-    result = list(
-        astra_db_collection.paginated_find(
-            filter=filter,
-            projection={"$vector": 0},
-            options={"limit": astra_docs_count["status"]["count"]},
-        )
+    cursor = astra_db_collection.find(
+        filter=filter,
     )
 
-    return result, 200
+    results = []
+    for result in cursor:
+        results.append(result)
+
+    return results, 200
 
 
 @app.post("/insertData", status_code=201)
 async def insert_astra(
-    params: InsertParams = Depends(),
+    params: InsertParams,
     raw_token: Annotated[str | None, Header(alias="token")] = None,
 ):
     # Fail if there is no token
@@ -105,13 +102,15 @@ async def insert_astra(
 
     # Attempt to connect to Astra DB
     try:
-        astra_db = AstraDB(
-            token=token,
-            api_endpoint=api_endpoint,
+        my_client = astrapy.DataAPIClient(
             caller_name=CALLER_NAME,
             caller_version=CALLER_VERSION,
         )
-        astra_db_collection = astra_db.collection(table)
+        my_database = my_client.get_database(
+            api_endpoint=api_endpoint,
+            token=token,
+        )
+        astra_db_collection = my_database.get_collection(table)
     except Exception as e:
         return {"error": str(e)}
 
@@ -123,7 +122,7 @@ async def insert_astra(
 
 @app.post("/updateData", status_code=200)
 async def update_astra(
-    params: UpdateParams = Depends(),
+    params: UpdateParams,
     raw_token: Annotated[str | None, Header(alias="token")] = None,
 ):
     # Fail if there is no token
@@ -147,13 +146,15 @@ async def update_astra(
 
     # Attempt to connect to Astra DB
     try:
-        astra_db = AstraDB(
-            token=token,
-            api_endpoint=api_endpoint,
+        my_client = astrapy.DataAPIClient(
             caller_name=CALLER_NAME,
             caller_version=CALLER_VERSION,
         )
-        astra_db_collection = astra_db.collection(table)
+        my_database = my_client.get_database(
+            api_endpoint=api_endpoint,
+            token=token,
+        )
+        astra_db_collection = my_database.get_collection(table)
     except Exception as e:
         return {"error": str(e)}
 
@@ -165,7 +166,7 @@ async def update_astra(
 
 @app.post("/deleteData", status_code=202)
 async def delete_astra(
-    params: DeleteParams = Depends(),
+    params: DeleteParams,
     raw_token: Annotated[str | None, Header(alias="token")] = None,
 ):
     # Fail if there is no token
@@ -183,13 +184,15 @@ async def delete_astra(
 
     # Attempt to connect to Astra DB
     try:
-        astra_db = AstraDB(
-            token=token,
-            api_endpoint=api_endpoint,
+        my_client = astrapy.DataAPIClient(
             caller_name=CALLER_NAME,
             caller_version=CALLER_VERSION,
         )
-        astra_db_collection = astra_db.collection(table)
+        my_database = my_client.get_database(
+            api_endpoint=api_endpoint,
+            token=token,
+        )
+        astra_db_collection = my_database.get_collection(table)
     except Exception as e:
         return {"error": str(e)}
 

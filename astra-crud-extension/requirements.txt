@@ -1,3 +1,4 @@
 fastapi
 uvicorn
-astrapy>=0.7.7
+python-multipart
+astrapy>=1.0
