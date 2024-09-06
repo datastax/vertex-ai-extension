@@ -4,7 +4,7 @@ import astrapy
 
 from fastapi import Depends, FastAPI, Header
 from pydantic import BaseModel
-from typing import Annotated, Any
+from typing import Annotated, Any, List, Dict
 
 
 app = FastAPI()
@@ -12,26 +12,21 @@ app = FastAPI()
 CALLER_NAME = "vertex-ai-extension"
 CALLER_VERSION = "0.1.1"  # TODO: Proper versioning
 
-my_client = astrapy.DataAPIClient(
-    caller_name=CALLER_NAME,
-    caller_version=CALLER_VERSION,
-)
-
 class ReadParams(BaseModel):
-    filter: dict[str, Any] = {}
+    filter: Dict[str, Any] = {}
 
 
 class InsertParams(BaseModel):
-    data: list
+    data: List[Dict[str, Any]]
 
 
 class UpdateParams(BaseModel):
-    filter: dict
-    fieldUpdate: dict
+    filter: Dict[str, Any]
+    fieldUpdate: Dict[str, Any]
 
 
 class DeleteParams(BaseModel):
-    filter: dict
+    filter: Dict[str, Any]
 
 
 @app.get("/health")
@@ -55,10 +50,14 @@ async def read_astra(
         return {"error": "api_endpoint not provided"}
 
     # Optional Params for the astra call
-    filter = params.filter.get('filter', {})
+    filter = params.filter
 
     # Attempt to connect to Astra DB
     try:
+        my_client = astrapy.DataAPIClient(
+            caller_name=CALLER_NAME,
+            caller_version=CALLER_VERSION,
+        )
         my_database = my_client.get_database(
             api_endpoint=api_endpoint,
             token=token,
@@ -81,7 +80,7 @@ async def read_astra(
 
 @app.post("/insertData", status_code=201)
 async def insert_astra(
-    params: InsertParams = Depends(),
+    params: InsertParams,
     raw_token: Annotated[str | None, Header(alias="token")] = None,
 ):
     # Fail if there is no token
@@ -103,6 +102,10 @@ async def insert_astra(
 
     # Attempt to connect to Astra DB
     try:
+        my_client = astrapy.DataAPIClient(
+            caller_name=CALLER_NAME,
+            caller_version=CALLER_VERSION,
+        )
         my_database = my_client.get_database(
             api_endpoint=api_endpoint,
             token=token,
@@ -119,7 +122,7 @@ async def insert_astra(
 
 @app.post("/updateData", status_code=200)
 async def update_astra(
-    params: UpdateParams = Depends(),
+    params: UpdateParams,
     raw_token: Annotated[str | None, Header(alias="token")] = None,
 ):
     # Fail if there is no token
@@ -133,7 +136,7 @@ async def update_astra(
         return {"error": "api_endpoint not provided"}
 
     # Optional Params for the astra call
-    filter = params.filter.get('filter', {})
+    filter = params.filter
 
     # Fail if no filter is provided
     if not filter:
@@ -143,6 +146,10 @@ async def update_astra(
 
     # Attempt to connect to Astra DB
     try:
+        my_client = astrapy.DataAPIClient(
+            caller_name=CALLER_NAME,
+            caller_version=CALLER_VERSION,
+        )
         my_database = my_client.get_database(
             api_endpoint=api_endpoint,
             token=token,
@@ -159,7 +166,7 @@ async def update_astra(
 
 @app.post("/deleteData", status_code=202)
 async def delete_astra(
-    params: DeleteParams = Depends(),
+    params: DeleteParams,
     raw_token: Annotated[str | None, Header(alias="token")] = None,
 ):
     # Fail if there is no token
@@ -173,10 +180,14 @@ async def delete_astra(
         return {"error": "api_endpoint not provided"}
 
     # Optional Params for the astra call
-    filter = params.filter.get('filter', {})
+    filter = params.filter
 
     # Attempt to connect to Astra DB
     try:
+        my_client = astrapy.DataAPIClient(
+            caller_name=CALLER_NAME,
+            caller_version=CALLER_VERSION,
+        )
         my_database = my_client.get_database(
             api_endpoint=api_endpoint,
             token=token,
