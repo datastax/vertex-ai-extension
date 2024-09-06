@@ -2,7 +2,7 @@ import os
 import uvicorn
 import astrapy
 
-from fastapi import Depends, FastAPI, Header
+from fastapi import FastAPI, Header
 from pydantic import BaseModel
 from typing import Annotated, Any, List, Dict
 
@@ -36,7 +36,7 @@ async def health_check():
 
 @app.post("/readData")
 async def read_astra(
-    params: ReadParams = Depends(),
+    params: ReadParams,
     raw_token: Annotated[str | None, Header(alias="token")] = None,
 ):
     # Fail if there is no token
